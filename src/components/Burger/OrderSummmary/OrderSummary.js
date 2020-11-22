@@ -6,7 +6,7 @@ const OrderSummary = (props) =>{
 
     const ingredients = Object.keys(props.ingredients).map(key =>{ 
         return (
-            <li>
+            <li key={key}>
                 <span style={{textTransform: 'capitalize'}}>{key}</span>: {props.ingredients[key]}
             </li>
         );
@@ -14,7 +14,7 @@ const OrderSummary = (props) =>{
     return (
         <Aux>
             <h3>Your Order</h3>
-            <p>A delicious burger with the foolowing ingrendients: </p>
+            <p>A delicious burger with the following ingredients: </p>
             <ul>
                 {ingredients}
             </ul>

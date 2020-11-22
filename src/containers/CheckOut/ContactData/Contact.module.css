@@ -1,0 +1,12 @@
+.ContactData {
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+@media(mind-width: 600) {
+    .ContactData {
+        width: 500px;
+    }
+}

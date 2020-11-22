@@ -3,7 +3,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import Aux from '../_Aux/_Aux';
 
 
-const withErrorHandler = (WrappedComponet, axios) =>{
+const withErrorHandler = (WrappedComponent, axios) => {
     return class extends Component {
         state = {
             error : null
@@ -34,7 +34,7 @@ const withErrorHandler = (WrappedComponet, axios) =>{
                 <Modal show={this.state.error} closeModal={this.errorConfirmedHandler}>
                     {this.state.error ? this.state.error.message : null}
                 </Modal>
-                <WrappedComponet {...this.props}/>
+                <WrappedComponent {...this.props}/>
             </Aux>
         )
         }
