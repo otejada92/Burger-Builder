@@ -89,13 +89,12 @@ class ContactData extends Component {
                         {value: 'cheap', displayValue: 'Cheap'},
                     ]
                 },
-                value: '',
+                value: 'fastest',
                 validation: {},
                 valid: true
             }
         },
         formIsValid: false,
-        loading: false
     }
 
     orderHandler = (event) => {
@@ -109,10 +108,11 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             price: +this.props.price,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId
         }
 
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order, this.props.token);
 
     }
 
@@ -174,7 +174,7 @@ class ContactData extends Component {
                         ))}
                         <Button btnType="Success" disabled={!this.state.formIsValid}>Order</Button>
                     </form>);
-        if(this.state.loading) {
+        if(this.props.loading) {
             form = <Spinner/>;
         }
         return (
@@ -187,14 +187,17 @@ class ContactData extends Component {
 }
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
-        price: state.totalPrice
+        ingredients: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderBurger: (orderData) => dispatch(action.purchaseBurgerStart(orderData))
+        onOrderBurger: (orderData, token ) => dispatch(action.purchaseBurger(orderData, token))
     }
 }
  export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios))
